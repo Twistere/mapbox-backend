@@ -1,0 +1,28 @@
+{
+  "name": "mapbox-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ONF-PROJECT/mapbox-backend.git"
+  },
+  "keywords": [],
+  "author": "Antunes Lucas <lucasantunes@free.fr>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ONF-PROJECT/mapbox-backend/issues"
+  },
+  "homepage": "https://github.com/ONF-PROJECT/mapbox-backend#readme",
+  "devDependencies": {
+    "prisma": "^3.8.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.8.1",
+    "express": "^4.17.2",
+    "multer": "^1.4.4"
+  }
+}
