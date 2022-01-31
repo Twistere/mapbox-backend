@@ -23,7 +23,7 @@ const imageUpload = multer({
                     new Date().valueOf() + 
                     '_' +
                     file.originalname
-                );
+                )
             }
         }
     ), 
@@ -31,6 +31,14 @@ const imageUpload = multer({
 
 
 app.post('/upload', imageUpload.single('upload'), async (req, res) => {
+    const { filename, mimetype, size} = req.file
+    const filePath = req.file.path
+
+    await prisma.image.create({
+        data : {
+            pathImg: filePath
+        }
+    })
     console.log(req.file)
     res.json('/upload api')
 })
@@ -40,4 +48,5 @@ app.get('/image/:filename', (req, res) => {
     const dirname = path.resolve();
     const fullfilepath = path.join(dirname, 'images/' + filename);
     return res.sendFile(fullfilepath);
-});
+})
+
