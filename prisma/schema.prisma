@@ -11,22 +11,17 @@ datasource db {
 }
 
 model Cadastre {
-  idCadastre Int     @id @default(autoincrement())
-  url        String  @db.VarChar(255)
-  owner      User    @relation(fields: [idOwner], references: [idUser])
+  idCadastre Int    @id @default(autoincrement())
+  url        String @db.VarChar(255)
+  owner      User   @relation(fields: [idOwner], references: [idUser])
   idOwner    Int
-  image      Image[]
+
 }
 
 model Image {
-  idImage            Int       @id @default(autoincrement())
-  longMid            Decimal
-  latMid             Decimal
-  altitude           Decimal
-  listCoordinates    Decimal[]
-  pathImg            String    @db.VarChar(255)
-  cadastre           Cadastre @relation(fields: [IdCadastre], references: [idCadastre])
-  IdCadastre Int
+  idImage Int    @id @default(autoincrement())
+  pathImg String @db.VarChar(255)
+
 }
 
 model User {
