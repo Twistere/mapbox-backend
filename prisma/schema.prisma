@@ -22,6 +22,10 @@ model Cadastre {
 model Image {
   idImage Int      @id @default(autoincrement())
   pathImg String   @db.VarChar(255)
+  gpsLatitude Float
+  gpsLongitude Float
+  absoluteAltitude Float
+  gimballYawDegree Float
   cadastre Cadastre @relation(fields: [idCad], references: [idCadastre])
   idCad Int
 
@@ -30,7 +34,7 @@ model Image {
 
 model User {
   idUser   Int        @id @default(autoincrement())
-  date     Int        
+  date     DateTime        
 
   cadastre Cadastre[]
 
