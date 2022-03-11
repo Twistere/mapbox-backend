@@ -2,22 +2,21 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 const xmp = require('exifr')
 
-
-
-const insertImg = async (date) => {
+const insertDate = async (date) => {
     await prisma.user.create({
         data: {
             date: (new Date(date).toISOString()),
+            
         }
     })
-
-
 }
 
-const insertImg2 = async (filePath) => {
+
+const insertImg = async (filePath) => {
     
     let data = await xmp.parse(filePath, { xmp: true })
-    console.log(data.FlightYawDegree)
+    const date = await prisma.user.findMany({orderBy: {idUser: 'desc'}})
+    console.log(date.length)
     await prisma.image.create({
         data: {
             pathImg: filePath,
@@ -27,15 +26,24 @@ const insertImg2 = async (filePath) => {
             absoluteAltitude: data.AbsoluteAltitude,
 
             cadastre : {
-                connect : {
-                    idCadastre : 1
+                connectOrCreate : {
+                    where : {
+                        idCadastre : date.length
+                    },
+                    create : {
+                        idOwner : date.length,
+                        url : `https://apicarto.ign.fr/api/cadastre/commune?code_insee=`,
+
+                        
+                    }
                 }
             }
+
         }
     })
 }
 
 module.exports = {
-    insertImg,
-    insertImg2
+    insertDate,
+    insertImg
 }
