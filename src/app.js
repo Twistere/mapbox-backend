@@ -1,7 +1,7 @@
 const  { PrismaClient } = require('@prisma/client')
 const express  = require('express')
 const app = express()
-const {insertImg} = require('./services/image-service')
+const {insertImg, insertDate} = require('./services/image-service')
 const multer = require('multer')
 const path = require('path')
 const xmp = require('exifr')
@@ -34,8 +34,10 @@ app.listen(3000, () =>
 
 app.use('/api', imageUpload.single('upload'),  async (req, res) => {
   const filePath = req.file.path
+  const date = req.body.date
+  console.log(req.headers)
+  await insertDate(date)
   await insertImg(filePath)
-  console.log(req.file)
   res.json('/upload api')
 
 })
