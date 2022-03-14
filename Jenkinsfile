@@ -28,6 +28,8 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh 'npm i'
+                sh 'dokcer-compose down'
+                sh 'sleep 10'
                 sh 'docker-compose up -d'
                 sh 'sleep 20'
                 sh 'npx prisma migrate dev --name init'
