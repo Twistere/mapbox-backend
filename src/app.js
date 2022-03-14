@@ -1,10 +1,12 @@
 const  { PrismaClient } = require('@prisma/client')
+const prisma = new PrismaClient()
 const express  = require('express')
 const app = express()
 const {insertImg, insertDate} = require('./services/image-service')
 const multer = require('multer')
 const path = require('path')
 const xmp = require('exifr')
+const { fetchUser } = require('./services/user-service')
 
 const imageUpload = multer({
   storage: multer.diskStorage(
@@ -32,12 +34,15 @@ app.listen(3000, () =>
 )
 
 
-app.use('/api', imageUpload.single('upload'),  async (req, res) => {
-  const filePath = req.file.path
+app.use('/api', imageUpload.array('upload', 12),  async (req, res) => {
+  const filePath = req.files
   const date = req.body.date
-  console.log(req.headers)
+
   await insertDate(date)
-  await insertImg(filePath)
+
+  for(let i = 0; i < filePath.length; i++)
+    await insertImg(filePath[i].path)
+
   res.json('/upload api')
 
 })
@@ -49,3 +54,10 @@ app.get('/image/:filename', (req, res) => {
     return res.sendFile(fullfilepath);
 })
 
+app.get('/user', async (req, res) => {
+    let user = fetchUser()
+    user.then(function (result){
+      console.log(result)
+      return res.json(result)
+    })
+})
