@@ -9,7 +9,7 @@ pipeline {
             steps {
                 echo 'Configure the project'
                 sh 'ls -la'
-                sh 'cp /home/fedora/.credentials/.env /var/lib/jenkins/workspace/mapbox-frontend_dev'
+                sh 'cp /home/fedora/.credentials/.env /var/lib/jenkins/workspace/mapbox-backend_dev'
             }
         }
 
@@ -19,8 +19,8 @@ pipeline {
             }
             steps {
                 echo 'Configure the project'
-                sh 'mv mapbox-frontend_main mapbox-frontend'
-                sh 'cp /home/fedora/.credentials/.env /var/lib/jenkins/workspace/mapbox-frontend'
+                sh 'ls -la'
+                sh 'cp /home/fedora/.credentials/.env /var/lib/jenkins/workspace/mapbox-backend_main'
             }
         }
 
@@ -28,8 +28,10 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh 'npm i'
-                sh 'ls -la'
-                sh 'npx webpack'
+                sh 'docker-compose up -d'
+                sh 'sleep 20'
+                sh 'npx prisma migrate dev --name init'
+                
             }
         }
 
@@ -41,9 +43,9 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 echo 'Delete the older version'
-                sh 'rm -rf /var/www/mapbox-frontend'
-                sh 'cp -R /var/lib/jenkins/workspace/mapbox-frontend_dev /var/www'
-                sh 'mv /var/www/mapbox-frontend_dev /var/www/mapbox-frontend' 
+                sh 'rm -rf /var/www/mapbox-backend'
+                sh 'cp -R /var/lib/jenkins/workspace/mapbox-backend_main /var/www'
+                sh 'mv /var/www/mapbox-backend_dev /var/www/mapbox-backend' 
             }
         }
     }
