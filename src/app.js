@@ -1,11 +1,9 @@
-const  { PrismaClient } = require('@prisma/client')
-const prisma = new PrismaClient()
 const express  = require('express')
 const app = express()
 const {insertImg, insertDate} = require('./services/image-service')
 const multer = require('multer')
 const path = require('path')
-const xmp = require('exifr')
+
 const { fetchUser } = require('./services/user-service')
 
 const imageUpload = multer({
