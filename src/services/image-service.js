@@ -32,7 +32,7 @@ const insertImg = async (filePath) => {
                     },
                     create : {
                         idOwner : date.length,
-                        url : `https://apicarto.ign.fr/api/cadastre/commune?code_insee=${postalCode[0].code}`,
+                        url : `https://apicarto.ign.fr/api/cadastre/commune?code_insee=`,
 
                         
                     }
