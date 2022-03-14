@@ -49,7 +49,8 @@ pipeline {
                 echo 'Delete the older version'
                 sh 'rm -rf /var/www/mapbox-backend'
                 sh 'cp -R /var/lib/jenkins/workspace/mapbox-backend_main /var/www'
-                sh 'mv /var/www/mapbox-backend_main /var/www/mapbox-backend' 
+                sh 'mv /var/www/mapbox-backend_main /var/www/mapbox-backend'
+                sh 'nohup node src/app.js &' 
             }
         }
     }
