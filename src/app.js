@@ -45,6 +45,6 @@ app.get("/user", async (req, res) => {
   let user = fetchUser();
   user.then(function (result) {
     console.log(result);
-    return res.json(result);
+    return res.send(result);
   });
 });
