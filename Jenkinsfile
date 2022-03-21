@@ -52,7 +52,7 @@ pipeline {
                 sh 'rm -rf /var/www/mapbox-backend'
                 sh 'cp -R /var/lib/jenkins/workspace/mapbox-backend_main /var/www'
                 sh 'mv /var/www/mapbox-backend_main /var/www/mapbox-backend'
-                sh 'cd /var/www/mapbox-backend'
+                sh 'cd /var/www/mapbox-backend && ls -la'
                 sh 'nohup node src/app.js &' 
             }
         }
