@@ -6,7 +6,7 @@ services:
     restart: always
     ports:
       - 9091:8080
-    links:
+    networks:
       - postgres-db
 
   postgres-db:
