@@ -53,7 +53,7 @@ pipeline {
                 sh 'cp -R /var/lib/jenkins/workspace/mapbox-backend_main /var/www'
                 sh 'mv /var/www/mapbox-backend_main /var/www/mapbox-backend'
                 sh 'cd /var/www/mapbox-backend && ls -la'
-                sh 'BUILD_ID=dontKillMe nohup node src/app.js &' 
+                sh 'JENKINS_NODE_COOKIE=dontKillMe nohup node src/app.js &' 
             }
         }
     }
