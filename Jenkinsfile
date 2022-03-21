@@ -21,7 +21,7 @@ pipeline {
             steps {
                 echo 'Configure the project'
                 sh 'ls -la'
-                sh 'cp /home/fedora/.credentials/.env /var/lib/jenkins/workspace/mapbox-backend_main'
+                sh 'cp /var/lib/jenkins/.credentials/.env  /var/lib/jenkins/workspace/mapbox-backend_main'
                 sh 'mkdir src/images'
             }
         }
