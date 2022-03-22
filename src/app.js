@@ -11,16 +11,29 @@ app.set('views', '/home/Lucas/development/mapbox-frontend/dist');
 app.set('view engine', 'html')
 app.set('view engine', 'ejs');
 
-const imageUpload = multer({
-  storage: multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, "src/images/");
-    },
-    filename: function (req, file, cb) {
-      cb(null, new Date().valueOf() + "_" + file.originalname);
-    },
-  }),
+const imageStorage = multer.diskStorage({
+  // Destination de mes images
+  destination: function (req, file, cb) {
+    cb(null, "src/images/");
+  },
+  //Renommage des images avec la date du jour avec minute seconde lors de l'insertion 
+  filename: function (req, file, cb) {
+    cb(null, new Date().valueOf() + "_" + file.originalname);
+  },
+
 });
+
+const imageUpload = multer({
+  storage: imageStorage,
+  fileFilter: function (req, file, cb) {
+    let ext = path.extname(file.originalname);
+    // Vériéfie les fichiers uploadés pour n'accepter que des images
+    if (ext !== '.PNG' && ext !== '.JPG' && '.JEPG')
+      cb(new Error('Seulement des images'));
+    cb(null, true);
+  },
+
+})
 
 app.use(express.json());
 
@@ -36,7 +49,7 @@ app.use("/api", imageUpload.array("upload", 12), async (req, res) => {
 
   for (let i = 0; i < filePath.length; i++) await insertImg(filePath[i].path);
 
-  res.redirect(200, 'http://vps-02643af6.vps.ovh.net');
+  res.json('Niquel')
 });
 
 app.get("/image/:filename", (req, res) => {
@@ -50,12 +63,12 @@ app.get("/user", async (req, res) => {
   let user = fetchUser();
   user.then(function (result) {
     console.log(result);
-    res.render("index", {user: result});
+    res.render("index", { user: result });
   });
 });
 
 
-app.get("/", async (req, res) =>{
+app.get("/", async (req, res) => {
   res.sendFile("/home/Lucas/development/mapbox-frontend/dist/index.html")
 })
 
