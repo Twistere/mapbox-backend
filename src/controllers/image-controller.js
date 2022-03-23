@@ -1,19 +1,18 @@
 const { insertImg } = require('../services/image-service');
 const { insertDate } = require('../services/user-service');
-const { imageUplaod } = require('../middlewares/image-middleware')
 const path = require("path");
-const multer = require("multer");
+
 
 
 const postImage = async (req, res, next) => {
     const filePath = req.files;
     const date = req.body.date;
-    console.log(req)
     await insertDate(date);
-    await imageUplaod(filePath, res);
+    console.log(filePath);
+    console.log(date);
     for (let i = 0; i < filePath.length; i++) await insertImg(filePath[i].path);
     res.status(200);
-    
+
 };
 
 
