@@ -2,14 +2,6 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const xmp = require("exifr");
 
-const insertDate = async (date) => {
-  await prisma.user.create({
-    data: {
-      date: new Date(date).toISOString(),
-    },
-  });
-};
-
 const insertImg = async (filePath) => {
   let data = await xmp.parse(filePath, { xmp: true });
   const date = await prisma.user.findMany({ orderBy: { idUser: "desc" } });
@@ -38,6 +30,5 @@ const insertImg = async (filePath) => {
 };
 
 module.exports = {
-  insertDate,
   insertImg,
 };
