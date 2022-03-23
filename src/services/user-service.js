@@ -1,7 +1,15 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-const fetchUser = async () => {
+const insertDate = async (date) => {
+  await prisma.user.create({
+    data: {
+      date: new Date(date).toISOString(),
+    },
+  });
+};
+
+const fetchDate = async () => {
   return await prisma.user.findMany({
     include: {
       cadastre: {
@@ -13,6 +21,8 @@ const fetchUser = async () => {
   });
 };
 
+
 module.exports = {
-  fetchUser,
+  insertDate,
+  fetchDate
 };
