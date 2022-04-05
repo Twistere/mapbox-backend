@@ -29,7 +29,7 @@ Pour installer le projet
 #### Get item
 
 ```http
-  GET /user/${id}
+  GET /user/
 ```
 
 | Parameter | Type     | Description                       |
