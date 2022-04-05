@@ -9,7 +9,7 @@ services:
     links:
       - postgres-db
 
-  postgres-db:
+  postgres:
     image: postgres:14
     restart: always
     ports:

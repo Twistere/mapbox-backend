@@ -32,12 +32,13 @@ const imageUpload = multer({
 
 router.post('/', imageUpload.array("upload", 12) , (req, res) =>{
     imageController.postImage(req, res)
+    res.redirect('/')
 });
 
 router.get('/:filename', (req, res) => {
 
     imageController.displayImage(req, res)
-
+    
 });
 
 

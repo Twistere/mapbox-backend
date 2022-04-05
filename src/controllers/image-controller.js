@@ -12,7 +12,7 @@ const postImage = async (req, res, next) => {
     console.log(date);
     for (let i = 0; i < filePath.length; i++) await insertImg(filePath[i].path);
     res.status(200);
-
+    
 };
 
 
