@@ -4,25 +4,33 @@ const prisma = new PrismaClient();
 const insertDate = async (date) => {
   await prisma.user.create({
     data: {
-      date: new Date(date).toISOString(),
+      date: new Date(date).toISOString('fr-FR', { timeZone: 'UTC' }),
     },
   });
 };
 
-const fetchDate = async () => {
-  return await prisma.user.findMany({
-    include: {
-      cadastre: {
-        include: {
-          image: true,
+const fetchAll = async (idUser) => {
+  return await prisma.user.findUnique({
+    where: {
+      idUser: parseInt(idUser),
+    },
+      include: {
+        cadastre: {
+          include: {
+            image: true,
+          },
         },
       },
-    },
   });
+};
+
+const fetchDate = async () => {
+  return await prisma.user.findMany();
 };
 
 
 module.exports = {
   insertDate,
-  fetchDate
+  fetchDate,
+  fetchAll
 };
