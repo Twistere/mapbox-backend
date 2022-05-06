@@ -18,3 +18,9 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
       POSTGRES_DB: ONF
+
+  firefox:
+    image: selenium/standalone-chrome:99.0
+    ports:
+      - 4444:4444
+    restart: always
