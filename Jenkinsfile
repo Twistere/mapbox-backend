@@ -41,7 +41,8 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Test'
+                echo 'Test..'
+                
             }
         }
 
@@ -57,4 +58,5 @@ pipeline {
             }
         }
     }
+
 }
