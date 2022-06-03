@@ -6,11 +6,11 @@ router.get('/', (req, res) =>{
 });
 
 router.get('/bundle', (req, res) =>{
-    res.sendFile('C:/Users/Lucas/dev/mapbox/dist/bundle.js', )
+    res.sendFile('/var/www/mapbox-frontend/dist/bundle.js', )
 })
 
 router.get('/style', (req, res) =>{
-    res.sendFile('C:/Users/Lucas/dev/mapbox/dist/style.css')
+    res.sendFile('/var/www/mapbox-frontend/dist/style.css')
 })
 
 module.exports = router; 
