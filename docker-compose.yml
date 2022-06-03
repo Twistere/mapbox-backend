@@ -7,7 +7,7 @@ services:
     ports:
       - 9091:8080
     links:
-      - postgres-db
+      - postgres
 
   postgres:
     image: postgres:14
@@ -18,3 +18,9 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
       POSTGRES_DB: ONF
+
+  chrome:
+    image: selenium/standalone-chrome:102.0-20220531
+    ports:
+      - 4444:4444
+    restart: always
