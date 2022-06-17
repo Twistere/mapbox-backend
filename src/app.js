@@ -7,7 +7,7 @@ const ejs_route = require("./routes/ejs-route")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.set('views', '/var/www/mapbox-frontend/dist');
+app.set('views', 'C:/Users/Lucas/dev/mapbox/dist');
 app.set('view engine', 'ejs');
 
 app.listen(3000, () =>
